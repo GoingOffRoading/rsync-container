@@ -15,8 +15,14 @@ if [ ! -b /dev/sdc1 ]; then
   exit 1
 fi
 
-echo "Device /dev/sdc1 found, attempting mount..."
-mount -t auto /dev/sdc1 "${DST}"
+echo "Device /dev/sdc1 found, checking partition info..."
+fdisk -l /dev/sdc1 || echo "fdisk failed, device may not be partitioned correctly"
+
+echo "Attempting mount with auto-detect..."
+if ! mount -t auto /dev/sdc1 "${DST}"; then
+  echo "Auto mount failed, trying vfat..."
+  mount -t vfat /dev/sdc1 "${DST}" || { echo "vfat mount also failed"; exit 1; }
+fi
 
 echo "Starting rsync from ${SRC} to ${DST}"
 echo "Timestamp: $(date)"
