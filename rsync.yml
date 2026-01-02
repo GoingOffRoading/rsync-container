@@ -22,7 +22,7 @@ spec:
                   mountPath: /host
                   readOnly: true
                 - name: usb-data
-                  mountPath: /dev/sdb
+                  mountPath: /dev/sdc1
           volumes:
             - name: host-data
               hostPath:

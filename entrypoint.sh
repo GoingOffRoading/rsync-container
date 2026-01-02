@@ -5,9 +5,9 @@ SRC=/host/
 DST=/usb/
 
 # Mount the USB device
-echo "Mounting USB device /dev/sdb to ${DST}"
+echo "Mounting USB device /dev/sdc1 to ${DST}"
 mkdir -p "${DST}"
-mount /dev/sdb "${DST}"
+mount /dev/sdc1 "${DST}"
 
 echo "Starting rsync from ${SRC} to ${DST}"
 echo "Timestamp: $(date)"
