@@ -14,7 +14,7 @@ spec:
           nodeName: node100
           containers:
             - name: rsync
-              image: yourrepo/rsync:latest
+              image: ghcr.io/goingoffroading/rsync:latest
               securityContext:
                 privileged: true
               volumeMounts:
@@ -30,5 +30,5 @@ spec:
                 type: Directory
             - name: usb-data
               hostPath:
-                path: /dev/sdb
+                path: /dev/sdc1
                 type: BlockDevice
