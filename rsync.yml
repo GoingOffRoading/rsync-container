@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rsync-host-to-usb
+  labels:
+    app: rsync
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          nodeName: node100
+          containers:
+            - name: rsync
+              image: yourrepo/rsync:latest
+              securityContext:
+                privileged: true
+              volumeMounts:
+                - name: host-data
+                  mountPath: /host
+                  readOnly: true
+                - name: usb-data
+                  mountPath: /dev/sdb
+          volumes:
+            - name: host-data
+              hostPath:
+                path: /host
+                type: Directory
+            - name: usb-data
+              hostPath:
+                path: /dev/sdb
+                type: BlockDevice
