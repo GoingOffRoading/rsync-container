@@ -34,3 +34,7 @@ If the USB is disconnected for any reason, the pod fails.
 ## Questions?
 
 Open an issue
+
+## To-Do
+
+- [ ] The container runs and writes data if the USB drive is unmounted.  Change the logic to check for the directory before writing.
