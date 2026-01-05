@@ -1,6 +1,6 @@
 FROM alpine:3.20
 
-RUN apk add --no-cache rsync bash
+RUN apk update && apk upgrade && apk add --no-cache rsync bash
 
 # Simple entrypoint script
 COPY entrypoint.sh /entrypoint.sh
