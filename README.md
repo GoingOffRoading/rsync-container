@@ -3,7 +3,9 @@ This was a quick and dirty solution to a small homelab project:
 
 In the event I am incapacitated, have a lamens friendly way for my survivors to have access to our family photos, important documents, etc without having to navigate the labrynth of auth and etc that are setup in my home cluster today.
 
-## Solution
+In this case, have a USB storage device plugged into one of my Kubernetes nodes, then run a Kubernetes Cronjob that runs this container on a regular basis to keep the USB storage device at parity with my data.  That way if something happens, my family can pull the USB device and they have copies of everything.
+
+## Setup
 
 - Plugin your USB storage device into your machine.
 
@@ -65,3 +67,4 @@ Open an issue
 
 - [x] The container runs and writes data if the USB drive is unmounted.  Change the logic to check for the directory before writing.
 - [ ] Get exclude logic working
+- [ ] Add more documentation about setup
