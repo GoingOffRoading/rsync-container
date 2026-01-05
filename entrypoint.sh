@@ -18,7 +18,7 @@ fi
 
 echo "Target directory found. Starting rsync from ${SRC} to ${USB_TARGET_DIR}"
 echo "Timestamp: $(date)"
-echo "Using command: ${RSYNC_CMD}"
+echo "Using command: ${RSYNC_CMD} ${SRC} ${USB_TARGET_DIR}"
 
 ${RSYNC_CMD} "${SRC}" "${USB_TARGET_DIR}"
 
