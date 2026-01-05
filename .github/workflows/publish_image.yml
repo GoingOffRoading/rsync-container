@@ -11,9 +11,11 @@ jobs:
       - name: Set image tag
         id: set-tag
         run: |
-          TAG="${{ github.ref_name }}"
-          TAG="${TAG//\//-}"
-          echo "tag=${TAG}" >> $GITHUB_OUTPUT
+          if [ "${{ github.ref_name }}" == "dev" ]; then
+            echo "tag=dev" >> $GITHUB_OUTPUT
+          else
+            echo "tag=v1.0" >> $GITHUB_OUTPUT
+          fi
       - name: Build and push the image
         run: |
           docker login --username goingoffroading --password ${{ secrets.GH_PAT }} ghcr.io
