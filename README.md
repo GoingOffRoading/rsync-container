@@ -17,6 +17,32 @@ In the event I am incapacitated, have a lamens friendly way for my survivors to 
 
 - Deploy the cronjob `kubectl apply -f ./rsync.yml`
 
+## Customizing Rsync Command
+
+By default, the container uses `rsync -avh --progress --delete` to sync files. You can customize this by setting the `RSYNC_COMMAND` environment variable in your `rsync.yml`:
+
+```yaml
+containers:
+  - name: rsync
+    image: ghcr.io/goingoffroading/rsync:latest
+    env:
+      - name: RSYNC_COMMAND
+        value: "rsync -avh --delete --exclude='*.tmp' --exclude='node_modules/'"
+      - name: USB_TARGET_DIR
+        value: "/usb/backup"
+    # ... rest of container config
+```
+
+This allows you to add custom exclusions, change verbosity, or modify any rsync behavior without rebuilding the image.
+
+### USB Target Directory
+
+The `USB_TARGET_DIR` environment variable specifies the target directory on the mounted USB drive where files will be synced. This directory **must exist** or the job will fail with an error. This provides a safety check to ensure the USB drive is properly mounted before attempting to sync files.
+
+Default value: `/usb/backup`
+
+If this directory doesn't exist, the container will exit with an error message, preventing accidental syncing to an incorrect location.
+
 ## Now What
 
 On the cron schedule, this cronjob will attempt to mount `/mnt/usb` and the file source into a pod.

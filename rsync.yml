@@ -5,18 +5,29 @@ metadata:
   labels:
     app: rsync
 spec:
+  # CHANGE THIS: Set your cron schedule (currently: daily at midnight)
   schedule: "0 0 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
         spec:
           restartPolicy: Never
+          # CHANGE THIS: Set to your Kubernetes node name where the USB is connected
           nodeName: node100
           containers:
             - name: rsync
               image: ghcr.io/goingoffroading/rsync:latest
               securityContext:
                 privileged: true
+              env:
+                # CHANGE THIS: Customize rsync command (e.g., add --exclude patterns)
+                - name: RSYNC_COMMAND
+                  value: "rsync -avh --progress --delete --exclude /stuff"
+                # CHANGE THIS: Target directory on USB drive (must exist or job will fail)
+                - name: USB_TARGET_DIR
+                  value: "/usb/backup"
               volumeMounts:
                 - name: host-data
                   mountPath: /host
@@ -27,8 +38,11 @@ spec:
             - name: host-data
               hostPath:
                 path: /host
+                # CHANGE THIS: Verify the path type matches your setup
                 type: Directory
             - name: usb-data
               hostPath:
+                # CHANGE THIS: Set to your USB device path (e.g., /dev/sdc1)
                 path: /dev/sdc1
+                # CHANGE THIS: Use BlockDevice for raw device, or Directory if pre-mounted
                 type: BlockDevice
