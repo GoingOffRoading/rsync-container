@@ -66,5 +66,5 @@ Open an issue
 ## To-Do
 
 - [x] The container runs and writes data if the USB drive is unmounted.  Change the logic to check for the directory before writing.
-- [ ] Get exclude logic working
+- [x] Get exclude logic working
 - [ ] Add more documentation about setup
