@@ -18,7 +18,7 @@ spec:
           nodeName: node100
           containers:
             - name: rsync
-              image: ghcr.io/goingoffroading/rsync:latest
+              image: ghcr.io/goingoffroading/rsync:v1.0
               securityContext:
                 privileged: true
               env:
