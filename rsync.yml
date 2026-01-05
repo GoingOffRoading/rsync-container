@@ -24,7 +24,7 @@ spec:
               env:
                 # CHANGE THIS: Customize rsync command (e.g., add --exclude patterns)
                 - name: RSYNC_COMMAND
-                  value: "rsync -avh --progress --delete --exclude='Stuff/Things'"
+                  value: "rsync -avh --progress --delete --exclude=Stuff/Things"
                 # CHANGE THIS: Target directory on USB drive (must exist or job will fail)
                 - name: USB_TARGET_DIR
                   value: "/usb/backup"
