@@ -28,6 +28,9 @@ spec:
                 # CHANGE THIS: Target directory on USB drive (must exist or job will fail)
                 - name: USB_TARGET_DIR
                   value: "/usb/backup"
+                # CHANGE THIS: Source directory to sync from (default: /host/)
+                - name: SRC_DIR
+                  value: "/host/"
               volumeMounts:
                 - name: host-data
                   mountPath: /host
